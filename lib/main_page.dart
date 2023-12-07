@@ -1,4 +1,5 @@
 import 'package:cakes_calculator/main_provider.dart';
+import 'package:cakes_calculator/widgets/mass_counter.dart';
 import 'package:cakes_calculator/widgets/shape_buttons.dart';
 import 'package:cakes_calculator/widgets/size_scroll.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +24,17 @@ class MainPage extends StatelessWidget {
                 children: [
                   Text('Cakes calculator',
                     style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, fontFamily: 'Italian'),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      MassCounter(),
+                      Text(data.setCoefficient()),
+                      Text(data.result.toString()),
+                    ],
+                  ),
                   ShapeButtons(),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizeScroll(location: 'TL'),
                       SizeScroll(location: 'TR'),
@@ -32,12 +42,12 @@ class MainPage extends StatelessWidget {
                   ),
                   ShapeButtons(top: false),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizeScroll(location: 'BL'),
                       SizeScroll(location: 'BR'),
                     ],
                   ),
-                  Text(data.setResult())
                 ],
               ),
             );

@@ -9,10 +9,32 @@ class MainProvider with ChangeNotifier {
   int sizeTR = 8;
   int sizeBL = 8;
   int sizeBR = 8;
-  late double result;
+  String coefficient = '0';
+  double result = 0;
+  String mass = '0000';
 
-  String setResult(){
-    return ((sizeTL + sizeTR) / (sizeBL + sizeBR)).toStringAsFixed(4);
+  String setCoefficient(){
+    coefficient = ((sizeTL + sizeTR) / (sizeBL + sizeBR)).toStringAsFixed(4);
+    return coefficient;
+  }
+
+  void setMass(int index, int order){
+    switch(order){
+      case 0:
+        mass = (index).toString() + mass.substring(1, 4);
+        break;
+      case 1:
+        mass = mass.substring(0, 1) + index.toString() + mass.substring(2, 4);
+        break;
+      case 2:
+        mass = mass.substring(0, 2) + index.toString() + mass.substring(3, 4);
+        break;
+      case 3:
+        mass = mass.substring(0, 3) + index.toString();
+        break;
+    }
+    result = double.parse(mass) * double.parse(coefficient);
+    notifyListeners();
   }
 
   int sizeScroll(String location, int index){
