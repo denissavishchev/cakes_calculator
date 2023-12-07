@@ -37,7 +37,9 @@ class MainPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizeScroll(location: 'TL'),
-                      SizeScroll(location: 'TR'),
+                      Visibility(
+                        visible: data.topSelectedButton == 2,
+                          child: SizeScroll(location: 'TR')),
                     ],
                   ),
                   ShapeButtons(top: false),
@@ -45,7 +47,9 @@ class MainPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizeScroll(location: 'BL'),
-                      SizeScroll(location: 'BR'),
+                      Visibility(
+                        visible: data.bottomSelectedButton == 2,
+                          child: SizeScroll(location: 'BR')),
                     ],
                   ),
                 ],

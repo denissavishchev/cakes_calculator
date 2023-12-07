@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MainProvider with ChangeNotifier {
 
-  List<String> buttonImages = ['circle', 'rect', 'square'];
+  List<String> buttonImages = ['circle', 'square', 'rect'];
   int topSelectedButton = 0;
   int bottomSelectedButton = 0;
   int sizeTL = 8;
