@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:cakes_calculator/constants.dart';
 import 'package:cakes_calculator/main_provider.dart';
 import 'package:cakes_calculator/widgets/mass_counter.dart';
 import 'package:cakes_calculator/widgets/shape_buttons.dart';
@@ -12,24 +15,35 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: Consumer<MainProvider>(
-          builder: (context, data, _){
-            return Container(
-              width: size.width,
-              height: size.height,
-              color: Colors.grey,
+      body: Consumer<MainProvider>(
+        builder: (context, data, _){
+          return Container(
+            width: size.width,
+            height: size.height,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/bg.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  const SizedBox(height: 10,),
                   Text('Cakes calculator',
-                    style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, fontFamily: 'Italian'),),
+                    style: TextStyle(
+                        fontSize: 48,
+                        color: kLight,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Italian'),),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       MassCounter(),
-                      Text(data.setCoefficient()),
-                      Text(data.result.toString()),
+                      Text(data.setCoefficient(), style: TextStyle(color: kWhite),),
+                      Text(data.result.toString(), style: TextStyle(color: kWhite),),
                     ],
                   ),
                   ShapeButtons(),
@@ -52,11 +66,12 @@ class MainPage extends StatelessWidget {
                           child: SizeScroll(location: 'BR')),
                     ],
                   ),
+                  const SizedBox(height: 10,),
                 ],
               ),
-            );
-          },
-        )
+            ),
+          );
+        },
       ),
     );
   }

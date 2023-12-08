@@ -15,6 +15,7 @@ class MainProvider with ChangeNotifier {
 
   String setCoefficient(){
     coefficient = ((sizeTL + sizeTR) / (sizeBL + sizeBR)).toStringAsFixed(4);
+    result = double.parse(mass) * double.parse(coefficient);
     return coefficient;
   }
 
