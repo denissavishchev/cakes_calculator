@@ -18,6 +18,12 @@ class SizeScroll extends StatelessWidget {
             height: 100,
             color: Colors.white,
             child: ListWheelScrollView(
+              controller: FixedExtentScrollController(
+                  initialItem: location == 'TL' ? data.lt - 8
+                      : location == 'TR' ? data.rt - 8
+                      : location == 'BL' ? data.ld - 8
+                      : data.rd - 8
+              ),
               onSelectedItemChanged: (index) {
                 FocusManager.instance.primaryFocus?.unfocus();
                 data.sizeScroll(location, index + 8);

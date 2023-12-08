@@ -22,7 +22,15 @@ class ShapeButtons extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(3, (index) {
                 return GestureDetector(
-                  onTap: () => data.selectTopButton(index, top),
+                  onTap: () {
+                    data.selectTopButton(index, top);
+                    if(data.topSelectedButton == 2){
+                      data.rt = 8;
+                    }
+                    if(data.bottomSelectedButton == 2){
+                      data.rd = 8;
+                    }
+                  },
                   child: Container(
                     width: 100,
                     height: 100,
@@ -94,7 +102,7 @@ class ElseContainer extends StatelessWidget {
                 ),
               ),
               child: IconSvg(
-                icon: data.buttonImages[index], color: kWhite,));
+                icon: data.buttonImages[index], color: kWhite.withOpacity(0.3),));
         });
   }
 }

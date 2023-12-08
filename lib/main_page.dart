@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:cakes_calculator/constants.dart';
 import 'package:cakes_calculator/main_provider.dart';
 import 'package:cakes_calculator/widgets/mass_counter.dart';
@@ -14,6 +13,8 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final data = Provider.of<MainProvider>(context, listen: false);
+    data.getData();
     return Scaffold(
       body: Consumer<MainProvider>(
         builder: (context, data, _){
@@ -34,10 +35,19 @@ class MainPage extends StatelessWidget {
                   const SizedBox(height: 10,),
                   Text('Cakes calculator',
                     style: TextStyle(
-                        fontSize: 48,
-                        color: kLight,
+                        fontSize: 72,
+                        color: kBrown,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Italian'),),
+                        fontFamily: 'Italian',
+                        shadows: [
+                          Shadow(
+                            blurRadius: 30,
+                            color: kWhite.withOpacity(0.6),
+                            offset: const Offset(1, 1)
+                          )
+                        ]
+                      ),
+                    ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -66,7 +76,7 @@ class MainPage extends StatelessWidget {
                           child: SizeScroll(location: 'BR')),
                     ],
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),

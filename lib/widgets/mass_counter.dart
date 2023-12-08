@@ -48,6 +48,8 @@ class Mass extends StatelessWidget {
             width: 58,
             height: 98,
             child: ListWheelScrollView(
+              controller: FixedExtentScrollController(
+                  initialItem: int.parse(data.mass.toString().substring(order, order + 1))),
               onSelectedItemChanged: (index) {
                 FocusManager.instance.primaryFocus?.unfocus();
                 data.setMass(index, order);
