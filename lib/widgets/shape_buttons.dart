@@ -23,13 +23,7 @@ class ShapeButtons extends StatelessWidget {
               children: List.generate(3, (index) {
                 return GestureDetector(
                   onTap: () {
-                    data.selectTopButton(index, top);
-                    if(data.topSelectedButton == 2){
-                      data.rt = 8;
-                    }
-                    if(data.bottomSelectedButton == 2){
-                      data.rd = 8;
-                    }
+                    data.selectButton(index, top);
                   },
                   child: Container(
                     width: 84,

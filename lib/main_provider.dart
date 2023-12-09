@@ -12,8 +12,8 @@ class MainProvider with ChangeNotifier {
   int ld = 8;
   int rd = 8;
   String coefficient = '0';
-  double result = 0;
   String mass = '0000';
+  String result = '0';
 
   void getData(){
     topSelectedButton = box.get('top') ?? 0;
@@ -25,7 +25,12 @@ class MainProvider with ChangeNotifier {
     mass = box.get('mass') ?? '0000';
   }
 
-  String setCoefficient(){
+  void calculate(){
+    result = (double.parse(mass) * double.parse(coefficient)).toStringAsFixed(1);
+    // notifyListeners();
+  }
+
+  void setCoefficient(){
     if(topSelectedButton == 0 && bottomSelectedButton == 0){
       coefficient = ((ld * ld) / (lt * lt)).toStringAsFixed(4);
     }else if(topSelectedButton == 0 && bottomSelectedButton == 1){
@@ -47,8 +52,8 @@ class MainProvider with ChangeNotifier {
     }else if(topSelectedButton == 2 && bottomSelectedButton == 2){
       coefficient = ((ld * rd) / (lt * rt)).toStringAsFixed(4);
     }
-    result = double.parse(mass) * double.parse(coefficient);
-    return coefficient;
+    // calculate();
+    // notifyListeners();
   }
 
   void setMass(int index, int order){
@@ -66,47 +71,52 @@ class MainProvider with ChangeNotifier {
         mass = mass.substring(0, 3) + index.toString();
         break;
     }
-    result = double.parse(mass) * double.parse(coefficient);
     box.put('mass', mass);
     notifyListeners();
+    setCoefficient();
+    calculate();
   }
 
-  int sizeScroll(String location, int index){
+  void sizeScroll(String location, int index){
     switch(location){
       case 'TL':
         lt = index;
         box.put('lt', lt);
         notifyListeners();
-        return lt;
       case 'TR':
         rt = index;
         box.put('rt', rt);
         notifyListeners();
-        return rt;
       case 'BL':
         ld = index;
         box.put('ld', ld);
         notifyListeners();
-        return ld;
       case 'BR':
         rd = index;
         box.put('rd', rd);
         notifyListeners();
-        return rd;
-      default:
-        return 8;
     }
+    setCoefficient();
+    calculate();
   }
 
-  void selectTopButton(int index, bool top){
-    if(top){
+  void selectButton(int index, bool top){
+    if(top && topSelectedButton != index){
       topSelectedButton = index;
+      if(topSelectedButton == 2){
+        rt = 8;
+      }
       box.put('top', topSelectedButton);
-    }else{
+    }if(!top && bottomSelectedButton != index){
       bottomSelectedButton = index;
+      if(bottomSelectedButton == 2){
+        rd = 8;
+      }
       box.put('bottom', bottomSelectedButton);
     }
     notifyListeners();
+    setCoefficient();
+    calculate();
   }
 
 }

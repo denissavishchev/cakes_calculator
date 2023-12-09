@@ -15,6 +15,8 @@ class MainPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     final data = Provider.of<MainProvider>(context, listen: false);
     data.getData();
+    data.setCoefficient();
+    data.calculate();
     return Scaffold(
       body: Consumer<MainProvider>(
         builder: (context, data, _){
@@ -82,7 +84,7 @@ class MainPage extends StatelessWidget {
                             children: [
                               Text('Result:', style: TextStyle(color: kWhite.withOpacity(0.7),),),
                               const SizedBox(width: 5,),
-                              Text(data.result.toStringAsFixed(1),
+                              Text(data.result,
                                 style: const TextStyle(color: kWhite, fontSize: 28),),
                               const SizedBox(width: 5,),
                               Text('g', style: TextStyle(color: kWhite.withOpacity(0.7)),),
@@ -91,7 +93,7 @@ class MainPage extends StatelessWidget {
                         ),
                         SizedBox(
                           width: 56,
-                            child: Text('(${data.setCoefficient()})',
+                            child: Text('(${data.coefficient})',
                               style: TextStyle(color: kWhite.withOpacity(0.3)),)),
                       ],
                     ),
