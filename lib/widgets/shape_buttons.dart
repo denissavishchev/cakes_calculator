@@ -32,8 +32,8 @@ class ShapeButtons extends StatelessWidget {
                     }
                   },
                   child: Container(
-                    width: 100,
-                    height: 100,
+                    width: 84,
+                    height: 84,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     padding: const EdgeInsets.all(1),
                     decoration: BoxDecoration(
@@ -101,7 +101,8 @@ class ElseContainer extends StatelessWidget {
                 ),
               ),
               child: IconSvg(
-                icon: data.buttonImages[index], color: kWhite.withOpacity(0.3),));
+                icon: data.buttonImages[index],
+                color: kWhite.withOpacity(0.3),));
         });
   }
 }

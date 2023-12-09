@@ -10,10 +10,24 @@ class MassCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: 260,
-        height: 80,
+        height: 70,
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
+            boxShadow: const [
+              BoxShadow(
+                  color: kLight,
+                  blurRadius: 20,
+                  spreadRadius: 5,
+                  offset: Offset(-6, -6)
+              ),
+              BoxShadow(
+                  color: kDark,
+                  blurRadius: 20,
+                  spreadRadius: 5,
+                  offset: Offset(6, 6)
+              ),
+            ],
           gradient: LinearGradient(
               colors: [
                 kDark.withOpacity(0.5),
@@ -46,18 +60,18 @@ class Mass extends StatelessWidget {
     return Consumer<MainProvider>(
         builder: (context, data, _){
           return SizedBox(
-            width: 58,
-            height: 76,
+            width: 50,
             child: ListWheelScrollView(
               controller: FixedExtentScrollController(
                   initialItem: int.parse(
-                      data.mass.toString().substring(order, order + 1))),
+                      data.mass.toString().substring(order, order + 1)),
+              ),
               onSelectedItemChanged: (index) {
                 FocusManager.instance.primaryFocus?.unfocus();
                 data.setMass(index, order);
               },
               physics: const FixedExtentScrollPhysics(),
-              itemExtent: 60,
+              itemExtent: 50,
               children: List.generate(10, (index){
                 return Container(
                   decoration: BoxDecoration(

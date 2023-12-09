@@ -1,7 +1,6 @@
 import 'package:cakes_calculator/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../constants.dart';
 
 class SizeScroll extends StatelessWidget {
@@ -16,11 +15,25 @@ class SizeScroll extends StatelessWidget {
     return Consumer<MainProvider>(
         builder: (context, data, _){
           return Container(
-            width: 60,
-            height: 60,
+            width: 70,
+            height: 70,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
+                boxShadow: const [
+                  BoxShadow(
+                      color: kLight,
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                      offset: Offset(-6, -6)
+                  ),
+                  BoxShadow(
+                      color: kDark,
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                      offset: Offset(6, 6)
+                  ),
+                ],
                 gradient: LinearGradient(
                     colors: [
                       kDark.withOpacity(0.5),
@@ -42,10 +55,10 @@ class SizeScroll extends StatelessWidget {
                 data.sizeScroll(location, index + 8);
               },
               physics: const FixedExtentScrollPhysics(),
-              itemExtent: 46,
+              itemExtent: 50,
               children: List.generate(43, (index){
                 return Container(
-                  width: 46,
+                  width: 50,
                     decoration: BoxDecoration(
                       border: Border.all(width: 1, color: kLight.withOpacity(0.7)),
                       borderRadius: const BorderRadius.all(Radius.circular(16)),
