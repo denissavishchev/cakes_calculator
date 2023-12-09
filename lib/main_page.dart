@@ -77,7 +77,7 @@ class MainPage extends StatelessWidget {
                       children: [
                         const SizedBox(width: 56,),
                         SizedBox(
-                          width: 160,
+                          width: 170,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
