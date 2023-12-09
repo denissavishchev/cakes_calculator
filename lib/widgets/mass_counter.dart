@@ -1,6 +1,7 @@
 import 'package:cakes_calculator/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../constants.dart';
 
 class MassCounter extends StatelessWidget {
   const MassCounter({Key? key}) : super(key: key);
@@ -8,16 +9,16 @@ class MassCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 250,
-        height: 98,
+        width: 260,
+        height: 80,
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-          borderRadius:
-          const BorderRadius.all(Radius.circular(30)),
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
           gradient: LinearGradient(
               colors: [
-                const Color(0xffbebebc).withOpacity(0.5),
-                const Color(0xff1a1a18).withOpacity(0.8),
+                kDark.withOpacity(0.5),
+                kDark.withOpacity(0.8),
+
               ],
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
@@ -46,38 +47,33 @@ class Mass extends StatelessWidget {
         builder: (context, data, _){
           return SizedBox(
             width: 58,
-            height: 98,
+            height: 76,
             child: ListWheelScrollView(
               controller: FixedExtentScrollController(
-                  initialItem: int.parse(data.mass.toString().substring(order, order + 1))),
+                  initialItem: int.parse(
+                      data.mass.toString().substring(order, order + 1))),
               onSelectedItemChanged: (index) {
                 FocusManager.instance.primaryFocus?.unfocus();
                 data.setMass(index, order);
               },
               physics: const FixedExtentScrollPhysics(),
-              itemExtent: 58,
+              itemExtent: 60,
               children: List.generate(10, (index){
                 return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 4),
-                  width: 50,
-                  height: 50,
                   decoration: BoxDecoration(
-                      color: const Color(0xff91918f),
-                      border:
-                      Border.all(color: Colors.red, width: 0.5),
-                      borderRadius: const BorderRadius.all(
-                          Radius.circular(25)),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 3,
-                            offset: Offset(0, 2)),
-                        BoxShadow(
-                            color: Color(0xff5e5e5c),
-                            blurRadius: 1,
-                            offset: Offset(0, -1)),
-                      ]),
-                  child: Center(child: Text('$index')),
+                    border: Border.all(width: 1, color: kLight.withOpacity(0.7)),
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        kLight,
+                        kDark,
+                      ],
+                    ),
+                  ),
+                  child: Center(child: Text('$index',
+                      style: const TextStyle(color: kWhite, fontSize: 28))),
                 );
               } ),
             ),

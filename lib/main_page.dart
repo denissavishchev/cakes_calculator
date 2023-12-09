@@ -51,11 +51,26 @@ class MainPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      MassCounter(),
-                      Text(data.setCoefficient(), style: TextStyle(color: kWhite),),
-                      Text(data.result.toString(), style: TextStyle(color: kWhite),),
+                      Text('Coef ${data.setCoefficient()}', style: TextStyle(color: kWhite),),
+                      Text('Result ${data.result.toString()}', style: TextStyle(color: kWhite),),
                     ],
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(width: 40,),
+                      MassCounter(),
+                      SizedBox(
+                        width: 40,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                              child: Text('g',
+                                style: TextStyle(
+                                    color: kWhite.withOpacity(0.7),
+                                    fontSize: 24),)))
+                    ],
+                  ),
+                  SizedBox(height: 20,),
                   ShapeButtons(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

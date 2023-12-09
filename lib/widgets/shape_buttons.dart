@@ -88,7 +88,6 @@ class ElseContainer extends StatelessWidget {
     return Consumer<MainProvider>(
         builder: (context, data, _){
           return Container(
-              // padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 border: Border.all(width: 0.5, color: kBrown.withOpacity(0.7)),
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
