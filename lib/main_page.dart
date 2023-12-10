@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:cakes_calculator/constants.dart';
 import 'package:cakes_calculator/main_provider.dart';
+import 'package:cakes_calculator/widgets/calculate_button.dart';
 import 'package:cakes_calculator/widgets/mass_counter.dart';
 import 'package:cakes_calculator/widgets/shape_buttons.dart';
 import 'package:cakes_calculator/widgets/size_scroll.dart';
@@ -15,8 +16,6 @@ class MainPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     final data = Provider.of<MainProvider>(context, listen: false);
     data.getData();
-    data.setCoefficient();
-    data.calculate();
     return Scaffold(
       body: Consumer<MainProvider>(
         builder: (context, data, _){
@@ -50,51 +49,57 @@ class MainPage extends StatelessWidget {
                         ]
                       ),
                     ),
-                  Container(
+                  SizedBox(
                     width: size.width * 0.9,
-                    height: 38,
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(8)),
-                          boxShadow: [
-                            const BoxShadow(
-                                color: kLight,
-                                blurRadius: 20,
-                                spreadRadius: 5,
-                                offset: Offset(-6, -6)
-                            ),
-                            BoxShadow(
-                                color: kDark.withOpacity(0.7),
-                                blurRadius: 20,
-                                spreadRadius: 5,
-                                offset: const Offset(6, 6)
-                            ),
-                          ]
-                      ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const SizedBox(width: 56,),
-                        SizedBox(
-                          width: 170,
+                        Container(
+                          width: size.width * 0.6,
+                          height: 38,
+                            padding: const EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                                boxShadow: [
+                                  const BoxShadow(
+                                      color: kLight,
+                                      blurRadius: 20,
+                                      spreadRadius: 5,
+                                      offset: Offset(-6, -6)
+                                  ),
+                                  BoxShadow(
+                                      color: kDark.withOpacity(0.7),
+                                      blurRadius: 20,
+                                      spreadRadius: 5,
+                                      offset: const Offset(6, 6)
+                                  ),
+                                ]
+                            ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text('Result:', style: TextStyle(color: kWhite.withOpacity(0.7),),),
-                              const SizedBox(width: 5,),
-                              Text(data.result,
-                                style: const TextStyle(color: kWhite, fontSize: 28),),
-                              const SizedBox(width: 5,),
-                              Text('g', style: TextStyle(color: kWhite.withOpacity(0.7)),),
+                              SizedBox(
+                                  width: 56,
+                                  child: Text('(${data.coefficient})',
+                                    style: TextStyle(color: kWhite.withOpacity(0.3)),)),
+                              SizedBox(
+                                width: 150,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(data.result,
+                                      style: const TextStyle(color: kWhite, fontSize: 28),),
+                                    const SizedBox(width: 5,),
+                                    Text('g', style: TextStyle(color: kWhite.withOpacity(0.7)),),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                        SizedBox(
-                          width: 56,
-                            child: Text('(${data.coefficient})',
-                              style: TextStyle(color: kWhite.withOpacity(0.3)),)),
+                        const CalculateButton()
                       ],
                     ),
                   ),
@@ -120,9 +125,9 @@ class MainPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       const SizeScroll(location: 'TL'),
-                      Visibility(
-                        visible: data.topSelectedButton == 2,
-                          child: const SizeScroll(location: 'TR')),
+                      data.topSelectedButton == 2
+                      ? const SizeScroll(location: 'TR')
+                      : const SizedBox(width: 72, height: 72)
                     ],
                   ),
                   const ShapeButtons(top: false),
@@ -130,9 +135,9 @@ class MainPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       const SizeScroll(location: 'BL'),
-                      Visibility(
-                        visible: data.bottomSelectedButton == 2,
-                          child: const SizeScroll(location: 'BR')),
+                      data.bottomSelectedButton == 2
+                      ? const SizeScroll(location: 'BR')
+                      : const SizedBox(width: 72, height: 72),
                     ],
                   ),
                   const SizedBox(height: 20,),
@@ -145,6 +150,8 @@ class MainPage extends StatelessWidget {
     );
   }
 }
+
+
 
 
 

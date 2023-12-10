@@ -23,13 +23,11 @@ class MainProvider with ChangeNotifier {
     ld = box.get('ld') ?? 8;
     rd = box.get('rd') ?? 8;
     mass = box.get('mass') ?? '0000';
+    coefficient = box.get('coefficient') ?? '0';
+    result = box.get('result') ?? '0';
   }
 
-  void calculate(){
-    result = (double.parse(mass) * double.parse(coefficient)).toStringAsFixed(1);
-  }
-
-  void setCoefficient() {
+  Future<void> calculate() async{
     var x = '$topSelectedButton$bottomSelectedButton';
     switch(x){
       case '00':
@@ -60,9 +58,20 @@ class MainProvider with ChangeNotifier {
         coefficient = ((ld * rd) / (lt * rt)).toStringAsFixed(4);
         break;
     }
+    result = (double.parse(mass) * double.parse(coefficient)).toStringAsFixed(1);
+    await box.put('top', topSelectedButton);
+    await box.put('bottom', bottomSelectedButton);
+    await box.put('mass', mass);
+    await box.put('rt', rt);
+    await box.put('lt', lt);
+    await box.put('ld', ld);
+    await box.put('rd', rd);
+    await box.put('coefficient', coefficient);
+    await box.put('result', result);
+    notifyListeners();
   }
 
-  void setMass(int index, int order) async{
+  void setMass(int index, int order) {
     switch(order){
       case 0:
         mass = (index).toString() + mass.substring(1, 4);
@@ -77,50 +86,38 @@ class MainProvider with ChangeNotifier {
         mass = mass.substring(0, 3) + index.toString();
         break;
     }
-    await box.put('mass', mass);
     notifyListeners();
-    setCoefficient();
-    calculate();
   }
 
-  void sizeScroll(String location, int index) async{
+  void sizeScroll(String location, int index) {
     switch(location){
       case 'TL':
         lt = index;
-        await box.put('lt', lt);
       case 'TR':
         rt = index;
-        await box.put('rt', rt);
       case 'BL':
         ld = index;
-        await box.put('ld', ld);
       case 'BR':
         rd = index;
-        await box.put('rd', rd);
-
     }
     notifyListeners();
-    setCoefficient();
-    calculate();
   }
 
-  Future<void> selectButton(int index, bool top) async{
+  void selectButton(int index, bool top) {
     if(top && topSelectedButton != index){
       topSelectedButton = index;
       if(topSelectedButton == 2){
         rt = 8;
       }
-      await box.put('top', topSelectedButton);
+
     }if(!top && bottomSelectedButton != index){
       bottomSelectedButton = index;
       if(bottomSelectedButton == 2){
         rd = 8;
       }
-      await box.put('bottom', bottomSelectedButton);
+
     }
     notifyListeners();
-    setCoefficient();
-    calculate();
   }
 
 }
