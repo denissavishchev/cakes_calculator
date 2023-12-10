@@ -55,7 +55,7 @@ class MainPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: size.width * 0.6,
+                          width: size.width * 0.66,
                           height: 38,
                             padding: const EdgeInsets.all(1),
                             decoration: BoxDecoration(
