@@ -8,14 +8,25 @@ import 'package:cakes_calculator/widgets/size_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+
+  @override
+  void initState() {
+    final data = Provider.of<MainProvider>(context, listen: false);
+    data.getData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final data = Provider.of<MainProvider>(context, listen: false);
-    data.getData();
     return Scaffold(
       body: Consumer<MainProvider>(
         builder: (context, data, _){
