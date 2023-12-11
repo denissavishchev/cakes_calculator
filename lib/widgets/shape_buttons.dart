@@ -22,9 +22,7 @@ class ShapeButtons extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(3, (index) {
                 return GestureDetector(
-                  onTap: () {
-                    data.selectButton(index, top);
-                  },
+                  onTap: () => data.selectButton(index, top),
                   child: Container(
                     width: 84,
                     height: 84,

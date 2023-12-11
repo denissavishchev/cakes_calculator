@@ -67,7 +67,7 @@ class Mass extends StatelessWidget {
                       data.mass.toString().substring(order, order + 1)),
               ),
               onSelectedItemChanged: (index) {
-                FocusManager.instance.primaryFocus?.unfocus();
+                // FocusManager.instance.primaryFocus?.unfocus();
                 data.setMass(index, order);
               },
               physics: const FixedExtentScrollPhysics(),

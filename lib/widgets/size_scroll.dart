@@ -51,7 +51,7 @@ class SizeScroll extends StatelessWidget {
                       : data.rd - 8
               ),
               onSelectedItemChanged: (index) {
-                FocusManager.instance.primaryFocus?.unfocus();
+                // FocusManager.instance.primaryFocus?.unfocus();
                 data.sizeScroll(location, index + 8);
               },
               physics: const FixedExtentScrollPhysics(),

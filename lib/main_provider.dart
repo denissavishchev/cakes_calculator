@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-class MainProvider with ChangeNotifier {
+class MainProvider extends ChangeNotifier {
 
   Box box = Hive.box('data');
   List<String> buttonImages = ['circle', 'square', 'rect'];
@@ -93,12 +93,16 @@ class MainProvider with ChangeNotifier {
     switch(location){
       case 'TL':
         lt = index;
+        break;
       case 'TR':
         rt = index;
+        break;
       case 'BL':
         ld = index;
+        break;
       case 'BR':
         rd = index;
+        break;
     }
     notifyListeners();
   }
@@ -109,13 +113,11 @@ class MainProvider with ChangeNotifier {
       if(topSelectedButton == 2){
         rt = 8;
       }
-
     }if(!top && bottomSelectedButton != index){
       bottomSelectedButton = index;
       if(bottomSelectedButton == 2){
         rd = 8;
       }
-
     }
     notifyListeners();
   }
