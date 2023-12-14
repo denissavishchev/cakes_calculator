@@ -33,9 +33,12 @@ class _MainPageState extends State<MainPage> {
           return Container(
             width: size.width,
             height: size.height,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bg.png"),
+                image: AssetImage(
+                    data.isDark
+                        ? "assets/images/bg.png"
+                        : "assets/images/bgw.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -45,21 +48,35 @@ class _MainPageState extends State<MainPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 10,),
-                  Text('Cakes calculator',
-                    style: TextStyle(
-                        fontSize: 72,
-                        color: kBrown,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Italian',
-                        shadows: [
-                          Shadow(
-                            blurRadius: 30,
-                            color: kWhite.withOpacity(0.6),
-                            offset: const Offset(1, 1)
-                          )
-                        ]
-                      ),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(width: 20,),
+                      Text('Cakes calculator',
+                        style: TextStyle(
+                            fontSize: 72,
+                            color: data.isDark ? kBrown : kWhite,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Italian',
+                            shadows: [
+                              Shadow(
+                                blurRadius: 30,
+                                color: data.isDark
+                                    ? kWhite.withOpacity(0.6)
+                                    : kBrown,
+                                offset: const Offset(1, 1)
+                              )
+                            ]
+                          ),
+                        ),
+                      IconButton(
+                          onPressed: data.changeTheme,
+                          icon: Icon(Icons.brush_outlined,
+                            color: data.isDark
+                                ? kWhite.withOpacity(0.4)
+                                : kBrown.withOpacity(0.6),))
+                    ],
+                  ),
                   SizedBox(
                     width: size.width * 0.9,
                     child: Row(
@@ -72,14 +89,16 @@ class _MainPageState extends State<MainPage> {
                             decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.all(Radius.circular(8)),
                                 boxShadow: [
-                                  const BoxShadow(
-                                      color: kLight,
+                                  BoxShadow(
+                                      color: data.isDark ? kLight : kCreme.withOpacity(0.5),
                                       blurRadius: 20,
                                       spreadRadius: 5,
-                                      offset: Offset(-6, -6)
+                                      offset: const Offset(-6, -6)
                                   ),
                                   BoxShadow(
-                                      color: kDark.withOpacity(0.7),
+                                      color: data.isDark 
+                                          ? kDark.withOpacity(0.7) 
+                                          : kGrey.withOpacity(0.6),
                                       blurRadius: 20,
                                       spreadRadius: 5,
                                       offset: const Offset(6, 6)
@@ -93,7 +112,10 @@ class _MainPageState extends State<MainPage> {
                               SizedBox(
                                   width: 56,
                                   child: Text('(${data.coefficient})',
-                                    style: TextStyle(color: kWhite.withOpacity(0.3)),)),
+                                    style: TextStyle(
+                                        color: data.isDark 
+                                            ? kWhite.withOpacity(0.3)
+                                            : kBrown.withOpacity(0.5)),)),
                               SizedBox(
                                 width: 150,
                                 child: Row(
@@ -101,9 +123,14 @@ class _MainPageState extends State<MainPage> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(data.result,
-                                      style: const TextStyle(color: kWhite, fontSize: 28),),
+                                      style: TextStyle(
+                                          color: data.isDark
+                                          ? kWhite : kBrown, fontSize: 28),),
                                     const SizedBox(width: 5,),
-                                    Text('g', style: TextStyle(color: kWhite.withOpacity(0.7)),),
+                                    Text('g', style: TextStyle(
+                                        color: data.isDark
+                                        ? kWhite.withOpacity(0.7)
+                                        : kBrown.withOpacity(0.7)),),
                                   ],
                                 ),
                               ),
@@ -126,7 +153,9 @@ class _MainPageState extends State<MainPage> {
                             alignment: Alignment.centerLeft,
                               child: Text('g',
                                 style: TextStyle(
-                                    color: kWhite.withOpacity(0.7),
+                                    color: data.isDark 
+                                        ? kWhite.withOpacity(0.7)
+                                        : kBrown.withOpacity(0.7),
                                     fontSize: 24),)))
                     ],
                   ),

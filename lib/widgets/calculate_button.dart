@@ -19,33 +19,38 @@ class CalculateButton extends StatelessWidget {
           width: 72,
           height: 72,
           decoration: BoxDecoration(
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                  color: kLight,
+                  color: data.isDark ? kLight : kCreme,
                   blurRadius: 20,
                   spreadRadius: 5,
-                  offset: Offset(-6, -6)
+                  offset: const Offset(-6, -6)
               ),
               BoxShadow(
-                  color: kDark,
+                  color: data.isDark ? kDark : kGrey,
                   blurRadius: 20,
                   spreadRadius: 5,
-                  offset: Offset(6, 6)
+                  offset: const Offset(6, 6)
               ),
             ],
-            border: Border.all(width: 2, color: kBrown.withOpacity(0.7)),
+            border: Border.all(width: 2, color: data.isDark
+                ? kBrown.withOpacity(0.7)
+                : kBeige.withOpacity(0.5)),
             borderRadius: const BorderRadius.all(Radius.circular(16)),
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                kLight,
-                kDark,
+                data.isDark ? kLight : kCreme,
+                data.isDark ? kDark : kGrey,
               ],
             ),
           ),
           child: Center(
-              child: IconSvg(icon: 'calculator', color: kWhite.withOpacity(0.2))),
+              child: IconSvg(icon: 'calculator',
+                  color: data.isDark
+                      ? kWhite.withOpacity(0.2)
+                      : kBrown.withOpacity(0.2))),
         ),
       );
     });

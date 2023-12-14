@@ -32,7 +32,7 @@ class ShapeButtons extends StatelessWidget {
                         borderRadius: const BorderRadius.all(Radius.circular(16)),
                         boxShadow: [
                           BoxShadow(
-                              color: kLight,
+                              color: data.isDark ? kLight : kCreme,
                               blurRadius: 20,
                               spreadRadius: 5,
                               offset: top
@@ -42,7 +42,7 @@ class ShapeButtons extends StatelessWidget {
                                   ? const Offset(-3, -3) : const Offset(-6, -6)
                           ),
                           BoxShadow(
-                              color: kDark,
+                              color: data.isDark ? kDark : kGrey,
                               blurRadius: 20,
                               spreadRadius: 5,
                               offset: top
@@ -81,20 +81,23 @@ class ElseContainer extends StatelessWidget {
         builder: (context, data, _){
           return Container(
               decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: kBrown.withOpacity(0.7)),
+                border: Border.all(width: 0.5,
+                    color: data.isDark
+                        ? kBrown.withOpacity(0.7)
+                        : kBeige.withOpacity(0.7)),
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
-                gradient: const LinearGradient(
+                gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    kLight,
-                    kDark,
+                    data.isDark ? kLight : kCreme,
+                    data.isDark ? kDark : kGrey,
                   ],
                 ),
               ),
               child: IconSvg(
                 icon: data.buttonImages[index],
-                color: kWhite.withOpacity(0.3),));
+                color: data.isDark ? kWhite.withOpacity(0.3) : kBrown.withOpacity(0.3),));
         });
   }
 }
@@ -111,10 +114,14 @@ class IfContainer extends StatelessWidget {
     return Consumer<MainProvider>(
         builder: (context, data, _){
           return Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               boxShadow: [
-                BoxShadow(color: kDark, blurRadius: 1, spreadRadius: 0),
-                BoxShadow(color: kLight, blurRadius: 2, spreadRadius: 5),
+                BoxShadow(
+                    color: data.isDark ? kDark : kGrey,
+                    blurRadius: 1, spreadRadius: 0),
+                BoxShadow(
+                    color: data.isDark ? kLight : kCreme,
+                    blurRadius: 2, spreadRadius: 5),
               ],
               borderRadius: BorderRadius.all(Radius.circular(16)),
               color: kBrown,
@@ -122,13 +129,14 @@ class IfContainer extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  kDark,
-                  kLight,
+                  data.isDark ? kDark : kGrey,
+                  data.isDark ? kLight : kCreme,
                 ],
               ),
             ),
             child: IconSvg(
-              icon: data.buttonImages[index], color: kWhite,),
+              icon: data.buttonImages[index],
+              color: data.isDark ? kWhite : kBrown,),
           );
         });
   }

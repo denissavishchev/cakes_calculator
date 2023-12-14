@@ -20,24 +20,24 @@ class SizeScroll extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                      color: kLight,
+                      color: data.isDark ? kLight : kCreme,
                       blurRadius: 20,
                       spreadRadius: 5,
-                      offset: Offset(-6, -6)
+                      offset: const Offset(-6, -6)
                   ),
                   BoxShadow(
-                      color: kDark,
+                      color: data.isDark ? kDark : kGrey,
                       blurRadius: 20,
                       spreadRadius: 5,
-                      offset: Offset(6, 6)
+                      offset: const Offset(6, 6)
                   ),
                 ],
                 gradient: LinearGradient(
                     colors: [
-                      kDark.withOpacity(0.5),
-                      kDark.withOpacity(0.8),
+                      data.isDark ? kDark.withOpacity(0.5) : kGrey.withOpacity(0.5),
+                      data.isDark ? kDark.withOpacity(0.8) : kGrey.withOpacity(0.8),
 
                     ],
                     begin: Alignment.bottomCenter,
@@ -51,7 +51,6 @@ class SizeScroll extends StatelessWidget {
                       : data.rd - 8
               ),
               onSelectedItemChanged: (index) {
-                // FocusManager.instance.primaryFocus?.unfocus();
                 data.sizeScroll(location, index + 8);
               },
               physics: const FixedExtentScrollPhysics(),
@@ -60,20 +59,24 @@ class SizeScroll extends StatelessWidget {
                 return Container(
                   width: 50,
                     decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: kLight.withOpacity(0.7)),
+                      border: Border.all(width: 1, 
+                          color: data.isDark 
+                              ? kLight.withOpacity(0.7)
+                              : kCreme.withOpacity(0.7)),
                       borderRadius: const BorderRadius.all(Radius.circular(16)),
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          kLight,
-                          kDark,
+                          data.isDark ? kLight : kCreme,
+                          data.isDark ? kDark : kGrey,
                         ],
                       ),
                     ),
                     child: Center(
                         child: Text('${index + 8}',
-                          style: const TextStyle(color: kWhite, fontSize: 20),))
+                          style: TextStyle(
+                              color: data.isDark ? kWhite : kBrown, fontSize: 20),))
                 );
               } ),
             ),

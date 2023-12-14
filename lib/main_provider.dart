@@ -14,6 +14,13 @@ class MainProvider extends ChangeNotifier {
   String coefficient = '0';
   String mass = '0000';
   String result = '0';
+  bool isDark = true;
+
+  void changeTheme() async{
+    isDark = !isDark;
+    await box.put('theme', isDark);
+    notifyListeners();
+  }
 
   void getData(){
     topSelectedButton = box.get('top') ?? 0;
@@ -25,6 +32,7 @@ class MainProvider extends ChangeNotifier {
     mass = box.get('mass') ?? '0000';
     coefficient = box.get('coefficient') ?? '0';
     result = box.get('result') ?? '0';
+    isDark = box.get('theme') ?? true;
   }
 
   Future<void> calculate() async{
