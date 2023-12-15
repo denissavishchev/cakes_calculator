@@ -48,34 +48,25 @@ class _MainPageState extends State<MainPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 10,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const SizedBox(width: 20,),
-                      Text('Cakes calculator',
-                        style: TextStyle(
-                            fontSize: 72,
-                            color: data.isDark ? kBrown : kWhite,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Italian',
-                            shadows: [
-                              Shadow(
-                                blurRadius: 30,
-                                color: data.isDark
-                                    ? kWhite.withOpacity(0.6)
-                                    : kBrown,
-                                offset: const Offset(1, 1)
-                              )
-                            ]
-                          ),
+                  GestureDetector(
+                    onTap: () => data.changeTheme(),
+                    child: Text('Cakes calculator',
+                      style: TextStyle(
+                          fontSize: 72,
+                          color: data.isDark ? kBrown : kWhite,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Italian',
+                          shadows: [
+                            Shadow(
+                              blurRadius: 30,
+                              color: data.isDark
+                                  ? kWhite.withOpacity(0.6)
+                                  : kBrown,
+                              offset: const Offset(1, 1)
+                            )
+                          ]
                         ),
-                      IconButton(
-                          onPressed: data.changeTheme,
-                          icon: Icon(Icons.brush_outlined,
-                            color: data.isDark
-                                ? kWhite.withOpacity(0.4)
-                                : kBrown.withOpacity(0.6),))
-                    ],
+                      ),
                   ),
                   SizedBox(
                     width: size.width * 0.9,
