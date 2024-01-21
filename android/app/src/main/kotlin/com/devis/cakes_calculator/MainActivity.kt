@@ -1,4 +1,4 @@
-package com.example.cakes_calculator
+package com.devis.cakes_calculator
 
 import io.flutter.embedding.android.FlutterActivity
 
